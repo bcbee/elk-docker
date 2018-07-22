@@ -5,7 +5,7 @@ services:
     environment:
       - cluster.name=dbz-cluster
       - bootstrap.memory_lock=true
-      - "ES_JAVA_OPTS=-Xms2G -Xmx2G"
+      - "ES_JAVA_OPTS=-Xms512m -Xmx512m"
     ulimits:
       memlock:
         soft: -1

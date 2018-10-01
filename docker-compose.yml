@@ -25,15 +25,6 @@ services:
     networks:
       - esnet
     restart: always
-  apm-server:
-    image: docker.elastic.co/apm/apm-server:6.4.0
-    ports:
-      - 8200:8200
-    networks:
-      - esnet
-    volumes:
-      - ./apm-server.yml:/usr/share/apm-server/apm-server.yml
-    restart: always
   logstash:
     image: docker.elastic.co/logstash/logstash:6.4.0
     ports:

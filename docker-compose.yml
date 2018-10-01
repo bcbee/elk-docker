@@ -1,7 +1,7 @@
 version: '3'
 services:
   elasticsearch:
-    image: docker.elastic.co/elasticsearch/elasticsearch:6.3.0
+    image: docker.elastic.co/elasticsearch/elasticsearch:6.4.0
     environment:
       - cluster.name=dbz-cluster
       - bootstrap.memory_lock=true
@@ -19,14 +19,14 @@ services:
       - esnet
     restart: always
   kibana:
-    image: docker.elastic.co/kibana/kibana:6.3.0
+    image: docker.elastic.co/kibana/kibana:6.4.0
     ports:
       - 5601:5601
     networks:
       - esnet
     restart: always
   apm-server:
-    image: docker.elastic.co/apm/apm-server:6.3.0
+    image: docker.elastic.co/apm/apm-server:6.4.0
     ports:
       - 8200:8200
     networks:
@@ -35,7 +35,7 @@ services:
       - ./apm-server.yml:/usr/share/apm-server/apm-server.yml
     restart: always
   logstash:
-    image: docker.elastic.co/logstash/logstash:6.3.0
+    image: docker.elastic.co/logstash/logstash:6.4.0
     ports:
       - 5004:5004
       - 9600:9600

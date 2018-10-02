@@ -27,10 +27,11 @@ services:
     restart: always
   logstash:
     image: docker.elastic.co/logstash/logstash:6.4.1
+    env_file:
+      - ./logstash.env
     #ports:
       #- 5004:5004
       #- 9600:9600
-      #- 5044:5044
     volumes:
       - ./logstash_config/waf_pipeline.conf:/usr/share/logstash/pipeline/logstash.conf
       - ./logstash_config/map_headers.rb:/etc/logstash/map_headers.rb

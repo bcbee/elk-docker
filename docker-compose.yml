@@ -35,6 +35,7 @@ services:
     volumes:
       - ./logstash_config/waf_pipeline.conf:/usr/share/logstash/pipeline/logstash.conf
       - ./logstash_config/map_headers.rb:/etc/logstash/map_headers.rb
+      - ./logstash_config/map_cookies.rb:/etc/logstash/map_cookies.rb
     networks:
       - esnet
     restart: always

@@ -4,6 +4,9 @@
 # LogStash::Event to the returned array
 def filter(event)
     cookie_string = event.get("[httpRequest][header][cookie]")
+    if cookie_string.nil?
+        return [event]
+    end
     cookies = cookie_string.split("; ")
   
     for cookie in cookies

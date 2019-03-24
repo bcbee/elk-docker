@@ -13,6 +13,8 @@ services:
       context: ./
       dockerfile: Dockerfile.logstash
     container_name: logstash
+    depends_on:
+      - elasticsearch
     env_file:
       - ./logstash_config/logstash.env
     #ports:
@@ -20,6 +22,7 @@ services:
       #- 9600:9600
     volumes:
       - ./logstash_config/logstash.conf:/usr/share/logstash/pipeline/logstash.conf
+      - C:/Users/brend/go/src/github.ol.epicgames.net/online-security/basilisk-backfill-loader/tmp:/loader
     networks:
       - esnet
     restart: always  
@@ -38,6 +41,11 @@ services:
       - esdata1:/usr/share/elasticsearch/data
     ports:
       - 9200:9200
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:9200/_cluster/health"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
     networks:
       - esnet
   elasticsearch2:

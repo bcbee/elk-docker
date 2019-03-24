@@ -2,11 +2,27 @@ version: "3"
 services:
   kibana:
     image: docker.elastic.co/kibana/kibana:6.6.2
+    container_name: kibana
     ports:
       - 5601:5601
     networks:
       - esnet
     restart: always
+  logstash:
+    build: 
+      context: ./
+      dockerfile: Dockerfile.logstash
+    container_name: logstash
+    env_file:
+      - ./logstash_config/logstash.env
+    #ports:
+      #- 5004:5004
+      #- 9600:9600
+    volumes:
+      - ./logstash_config/logstash.conf:/usr/share/logstash/pipeline/logstash.conf
+    networks:
+      - esnet
+    restart: always  
   elasticsearch:
     image: docker.elastic.co/elasticsearch/elasticsearch:6.6.2
     container_name: elasticsearch

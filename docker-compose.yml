@@ -1,9 +1,17 @@
-version: '3'
+version: "3"
 services:
+  kibana:
+    image: docker.elastic.co/kibana/kibana:6.6.2
+    ports:
+      - 5601:5601
+    networks:
+      - esnet
+    restart: always
   elasticsearch:
-    image: docker.elastic.co/elasticsearch/elasticsearch:6.4.0
+    image: docker.elastic.co/elasticsearch/elasticsearch:6.6.2
+    container_name: elasticsearch
     environment:
-      - cluster.name=dbz-cluster
+      - cluster.name=docker-cluster
       - bootstrap.memory_lock=true
       - "ES_JAVA_OPTS=-Xms512m -Xmx512m"
     ulimits:
@@ -14,37 +22,101 @@ services:
       - esdata1:/usr/share/elasticsearch/data
     ports:
       - 9200:9200
-      - 9300:9300
     networks:
       - esnet
-    restart: always
-  kibana:
-    image: docker.elastic.co/kibana/kibana:6.4.0
-    ports:
-      - 5601:5601
-    networks:
-      - esnet
-    restart: always
-  apm-server:
-    image: docker.elastic.co/apm/apm-server:6.4.0
-    ports:
-      - 8200:8200
-    networks:
-      - esnet
+  elasticsearch2:
+    image: docker.elastic.co/elasticsearch/elasticsearch:6.6.2
+    container_name: elasticsearch2
+    environment:
+      - cluster.name=docker-cluster
+      - bootstrap.memory_lock=true
+      - "ES_JAVA_OPTS=-Xms512m -Xmx512m"
+      - "discovery.zen.ping.unicast.hosts=elasticsearch"
+    ulimits:
+      memlock:
+        soft: -1
+        hard: -1
     volumes:
-      - ./apm-server.yml:/usr/share/apm-server/apm-server.yml
-    restart: always
-  logstash:
-    image: docker.elastic.co/logstash/logstash:6.4.0
-    ports:
-      - 5004:5004
-      - 9600:9600
+      - esdata2:/usr/share/elasticsearch/data
     networks:
       - esnet
-    restart: always
+  elasticsearch3:
+    image: docker.elastic.co/elasticsearch/elasticsearch:6.6.2
+    container_name: elasticsearch3
+    environment:
+      - cluster.name=docker-cluster
+      - bootstrap.memory_lock=true
+      - "ES_JAVA_OPTS=-Xms512m -Xmx512m"
+      - "discovery.zen.ping.unicast.hosts=elasticsearch"
+    ulimits:
+      memlock:
+        soft: -1
+        hard: -1
+    volumes:
+      - esdata3:/usr/share/elasticsearch/data
+    networks:
+      - esnet
+  elasticsearch4:
+    image: docker.elastic.co/elasticsearch/elasticsearch:6.6.2
+    container_name: elasticsearch4
+    environment:
+      - cluster.name=docker-cluster
+      - bootstrap.memory_lock=true
+      - "ES_JAVA_OPTS=-Xms512m -Xmx512m"
+      - "discovery.zen.ping.unicast.hosts=elasticsearch"
+    ulimits:
+      memlock:
+        soft: -1
+        hard: -1
+    volumes:
+      - esdata4:/usr/share/elasticsearch/data
+    networks:
+      - esnet
+  elasticsearch5:
+    image: docker.elastic.co/elasticsearch/elasticsearch:6.6.2
+    container_name: elasticsearch5
+    environment:
+      - cluster.name=docker-cluster
+      - bootstrap.memory_lock=true
+      - "ES_JAVA_OPTS=-Xms512m -Xmx512m"
+      - "discovery.zen.ping.unicast.hosts=elasticsearch"
+    ulimits:
+      memlock:
+        soft: -1
+        hard: -1
+    volumes:
+      - esdata5:/usr/share/elasticsearch/data
+    networks:
+      - esnet
+  elasticsearch6:
+    image: docker.elastic.co/elasticsearch/elasticsearch:6.6.2
+    container_name: elasticsearch6
+    environment:
+      - cluster.name=docker-cluster
+      - bootstrap.memory_lock=true
+      - "ES_JAVA_OPTS=-Xms512m -Xmx512m"
+      - "discovery.zen.ping.unicast.hosts=elasticsearch"
+    ulimits:
+      memlock:
+        soft: -1
+        hard: -1
+    volumes:
+      - esdata6:/usr/share/elasticsearch/data
+    networks:
+      - esnet
 
 volumes:
   esdata1:
+    driver: local
+  esdata2:
+    driver: local
+  esdata3:
+    driver: local
+  esdata4:
+    driver: local
+  esdata5:
+    driver: local
+  esdata6:
     driver: local
 
 networks:

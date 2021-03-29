@@ -4,7 +4,7 @@
 
 1. Download and install [Docker for Desktop](https://www.docker.com/products/docker-desktop)
 2. Download and install [VSCode](https://code.visualstudio.com/)
-3. Download this repository's core by clicking the green `Code` button, and then `Download ZIP`.
+3. Download this code repository by clicking the green `Code` button in GitHub, and then `Download ZIP`.
 4. Unzip `elk-docker-master.zip` into a folder and open it with VSCode
 5. Follow the guide to open your [integrated terminal](https://code.visualstudio.com/docs/editor/integrated-terminal)
 6. Follow the usage guide below
